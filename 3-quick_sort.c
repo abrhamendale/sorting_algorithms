@@ -45,6 +45,7 @@ void quick_sort(int *array, size_t size)
         	partition_left(tarray, start, left - 1, size);
 	partition_left(tarray, left + 1, end, size);
 	memcpy(array, tarray, size * sizeof(int));
+	free(tarray);
 }
 void partition_left(int *array, unsigned int start, unsigned int end, size_t size)
 {
@@ -79,4 +80,5 @@ void partition_left(int *array, unsigned int start, unsigned int end, size_t siz
 		partition_left(tarray, start, start + left - 1, size);
 	if (start + left < end)
 		partition_left(tarray, start + left + 1, end, size);
+	free(tarray);
 }
