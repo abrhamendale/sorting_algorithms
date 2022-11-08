@@ -11,7 +11,7 @@ void counting_sort(int *array, size_t size)
 {
 	unsigned int i;
 	int max = 0, *carray;
-	int *sarray = malloc (sizeof(int) * size);
+	int *sarray = malloc(sizeof(int) * size);
 
 	for (i = 0 ; i < size ; i++)
 	{
@@ -26,8 +26,8 @@ void counting_sort(int *array, size_t size)
 	print_array(carray, max + 1);
 	for (i = 0 ; i < size ; i++)
 	{
-		 sarray[carray[array[i]] - 1] = array[i];
-		 carray[array[i]]--;
+		sarray[carray[array[i]] - 1] = array[i];
+		carray[array[i]]--;
 	}
 	for (i = 0 ; i < size ; i++)
 		array[i] = sarray[i];

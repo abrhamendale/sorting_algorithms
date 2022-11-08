@@ -16,31 +16,35 @@ void quick_sort(int *array, size_t size)
 	int *tarray = malloc(sizeof(int) * size);
 
 	memcpy(tarray, array, size * sizeof(int));
-	printf("---------quick_sort---------\n");
+	/*printf("---------quick_sort---------\n");*/
 	pivot = array[size - 1];
 	for (i = 0; i < size; i++)
 	{
 		if (array[i] < pivot)
 		{
 			tarray[left] = array[i];
-			printf("%d", tarray[left]);
+			/*printf("%d", tarray[left]);*/
 			left++;
 		}
 		if (array[i] > pivot)
 		{
 			tarray[size - right] = array[i];
-			printf("\t");
-			printf("%d %d", tarray[size - right], array[i]);
+			/*printf("\t");
+			 *printf("%d %d", tarray[size - right], array[i]);
+			 */
 			right++;
 		}
 	}
 	tarray[left] = pivot;
-	printf("\n");
+	/*printf("\n");
+	 *print_array(tarray, end - start + 1);
+	 *printf("start:%d end:%d\n", start, end);
+	 */
 	print_array(tarray, end - start + 1);
-	printf("start:%d end:%d\n", start, end);
 	if (left != 0)
         	partition_left(tarray, start, left - 1, size);
 	partition_left(tarray, left + 1, end, size);
+	memcpy(array, tarray, size * sizeof(int));
 }
 void partition_left(int *array, unsigned int start, unsigned int end, size_t size)
 {
@@ -50,9 +54,10 @@ void partition_left(int *array, unsigned int start, unsigned int end, size_t siz
 
 	pivot = array[end];
 	memcpy(tarray, array, size * sizeof(int));
-	printf("---------partition_left---------\n");
-	printf("start:%d end:%d pivot:%d\n", start, end, pivot);
-	print_array(tarray, 10);
+	/*
+	 * printf("---------partition_left---------\n");
+	 * printf("start:%d end:%d pivot:%d\n", start, end, pivot);
+	*/
 	if (start == end)
 		return;
 	for (i = start; i < end; i++)
@@ -75,28 +80,3 @@ void partition_left(int *array, unsigned int start, unsigned int end, size_t siz
 	if (start + left < end)
 		partition_left(tarray, start + left + 1, end, size);
 }
-/*
-void partition_right(array, start, end)
-{
-	int pivot;
-        unsigned int i, j, left = 0, right = 1;
-
-        for (i = 0; i < size; i++)
-        {
-		pivot = array[end];
-		if (array[i] < pivot)
-                {
-			tarray[left] = array[i];
-			left++;
-		}
-		if (array[i] > pivot)
-		{
-			tarray[size - right] = array[i];
-			right++;
-		}
-	}
-	left++;
-	partition_left(array, left, end);
-	partition_right(array, start, left);
-}
-*/

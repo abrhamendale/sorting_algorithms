@@ -44,3 +44,5 @@ listint_t *swap_list_elements(listint_t **list, listint_t *swp);
 listint_t *create_listint(const int *array, size_t size);
 size_t get_size(listint_t **list);
 void partition_left(int *array, unsigned int start, unsigned int end, size_t size);
+void swapper(int *array, unsigned int i1, unsigned int i2);
+void sorter(int *array, int i, int end);
