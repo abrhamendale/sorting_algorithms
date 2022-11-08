@@ -4,7 +4,7 @@
  * swap_list_elements - Swaps elements of a linked list
  *
  * @list: Head of the list
- * @Index: Index of the element to be removed
+ * @swp: Pointer to the element to be removed
  *
  * Return: Nothing
  */
@@ -57,7 +57,7 @@ size_t get_size(listint_t **list)
 /**
  * insertion_sort_list - Sorts an array using insertion sort algorithm
  *
- * @array: Input list
+ * @list: Input list
  *
  * Return: Nothing
  */
@@ -78,7 +78,7 @@ void insertion_sort_list(listint_t **list)
 				swap_list_elements(list, swp);
 			if (parse->prev != NULL)
 				parse = parse->prev;
-			else	
+			else
 				break;
 		}
 		if (parse == NULL)

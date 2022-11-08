@@ -1,6 +1,23 @@
 #include "sort.h"
 
 /**
+ * swapper - Swaps array elements
+ *
+ * @array: Input array
+ * @i1: Index 1
+ * @i2: Index 2
+ *
+ * Return: Nothing
+ */
+void swapper(int *array, unsigned int i1, unsigned int i2)
+{
+	int tmp;
+
+	tmp = array[i1];
+	array[i1] = array[i2];
+	array[i2] = tmp;
+}
+/**
  * quick_sort - Sorts an array using bubble sort algorithm
  *
  * @array: Array to be sorted
@@ -11,74 +28,68 @@
 void quick_sort(int *array, size_t size)
 {
 	int pivot;
-	unsigned int i, start = 0, end = size - 1;
-	unsigned int left = 0, right = 1;
-	int *tarray = malloc(sizeof(int) * size);
+	unsigned int i, start = 0, end = size - 1, s = -1;
 
-	memcpy(tarray, array, size * sizeof(int));
 	/*printf("---------quick_sort---------\n");*/
 	pivot = array[size - 1];
 	for (i = 0; i < size; i++)
 	{
 		if (array[i] < pivot)
 		{
-			tarray[left] = array[i];
-			/*printf("%d", tarray[left]);*/
-			left++;
+			s++;
+			swapper(array, i, s);
+			if (array[i] != array[s])
+				print_array(array, size);
 		}
-		if (array[i] > pivot)
+		if (i == size - 2)
 		{
-			tarray[size - right] = array[i];
-			/*printf("\t");
-			 *printf("%d %d", tarray[size - right], array[i]);
-			 */
-			right++;
+			swapper(array, size - 1, s + 1);
+			if (array[size - 1] != array[s + 1])
+				print_array(array, size);
 		}
 	}
-	tarray[left] = pivot;
-	/*printf("\n");
-	 *print_array(tarray, end - start + 1);
-	 *printf("start:%d end:%d\n", start, end);
-	 */
-	print_array(tarray, end - start + 1);
-	if (left != 0)
-        	partition_left(tarray, start, left - 1, size);
-	partition_left(tarray, left + 1, end, size);
-	memcpy(array, tarray, size * sizeof(int));
-	free(tarray);
+	if (s + 1 != 0)
+		partition_left(array, start, s, size);
+	partition_left(array, s + 2, end, size);
 }
-void partition_left(int *array, unsigned int start, unsigned int end, size_t size)
+/**
+ * partition_left - partitions the array
+ *
+ * @array: Input array
+ * @start: Start of the partition
+ * @end: The end of the partition
+ * @size: The end of the partiotn
+ *
+ * Return: Nothing
+ */
+void partition_left(int *array, unsigned int start, unsigned
+		int end, size_t size)
 {
 	int pivot;
-        unsigned int i, left = 0, right = 0;
-	int *tarray = malloc(sizeof(int) * size);
+	unsigned int i, s = -1;
 
 	pivot = array[end];
-	memcpy(tarray, array, size * sizeof(int));
-	/*
-	 * printf("---------partition_left---------\n");
-	 * printf("start:%d end:%d pivot:%d\n", start, end, pivot);
-	*/
+
 	if (start == end)
 		return;
 	for (i = start; i < end; i++)
-        {
+	{
 		if (array[i] < pivot)
-                {
-			tarray[start + left] = array[i];
-			left++;
-		}
-		if (array[i] > pivot)
 		{
-			tarray[end - right] = array[i];
-			right++;
+			s++;
+			swapper(array, i, start + s);
+			if (array[i] != array[start + s])
+				print_array(array, size);
+		}
+		if (i == end - 1)
+		{
+			swapper(array, end, start + s + 1);
+			if (array[end] != array[start + s + 1])
+				print_array(array, size);
 		}
 	}
-	tarray[start + left] = pivot;
-	print_array(tarray, 10);
-	if (left > 0)
-		partition_left(tarray, start, start + left - 1, size);
-	if (start + left < end)
-		partition_left(tarray, start + left + 1, end, size);
-	free(tarray);
+	if (s + 1 > 0)
+		partition_left(array, start, start + s, size);
+	if (start + s + 1 < end)
+		partition_left(array, start + s + 2, end, size);
 }
