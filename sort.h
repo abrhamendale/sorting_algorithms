@@ -48,7 +48,7 @@ size_t get_size(listint_t **list);
 void partition_left(int *array, unsigned int start,
 		unsigned int end, size_t size);
 void swapper(int *array, unsigned int i1, unsigned int i2);
-void sorter(int *array, int i, int end);
+void sorter(int *array, int i, int end, size_t size);
 void mergesorter(int *array, size_t size, unsigned int l, unsigned int r);
 void print_array_section(const int *array,
 		unsigned int start, unsigned int end);

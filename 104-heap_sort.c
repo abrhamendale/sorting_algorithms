@@ -16,7 +16,6 @@ void swapper(int *array, unsigned int i1, unsigned int i2)
 	tmp = array[i1];
 	array[i1] = array[i2];
 	array[i2] = tmp;
-	print_array(array, 10);
 }
 /**
  * heap_sort - Sorts an array using bubble sort algorithm
@@ -35,19 +34,27 @@ void heap_sort(int *array, size_t size)
 		if (array[0] < array[1] && array[2] < array[1] && size - 1 - i >= 2)
 		{
 			swapper(array, 0, 1);
+			print_array(array, size);
 			sorter(array, 1, size - 1 - i);
 		}
 		if (array[0] < array[2] && array[1] < array[2] && size - 1 - i >= 2)
 		{
 			swapper(array, 0, 2);
+			print_array(array, size);
 			sorter(array, 2, size - 1 - i);
 		}
 		if (size - 1 - i >= 2)
 			sorter(array, 2, size - 1 - i);
 		if (size - 1 - i == 1 && array[0] < array[1])
+		{
 			swapper(array, 0, size - 1 - i);
+			print_array(array, size);
+		}
 		if (size - 1 - i > 0)
+		{
 			swapper(array, 0, size - 1 - i);
+			print_array(array, size);
+		}
 	}
 }
 /**
@@ -59,7 +66,7 @@ void heap_sort(int *array, size_t size)
  *
  * Return: Nothing
  */
-void sorter(int *array, int i, int end)
+void sorter(int *array, int i, int end, size_t size)
 {
 	if (i == end)
 		return;
@@ -71,6 +78,7 @@ void sorter(int *array, int i, int end)
 				array[i + i + 2] < array[i + i + 1]) && i + i + 1 <= end)
 	{
 		swapper(array, i, i + i + 1);
+		print_array(array, size);
 		sorter(array, i + i + 1, end);
 	}
 	if (i + i + 2 <= end)
@@ -81,6 +89,7 @@ void sorter(int *array, int i, int end)
 			< array[i + i + 2] && i + i + 2 <= end)
 	{
 		swapper(array, i, i + i + 2);
+		print_array(array, size);
 		sorter(array, i + i + 2, end);
 	}
 }
