@@ -1,3 +1,5 @@
+#ifndef SORT_H
+#define SORT_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,9 +17,9 @@
  */
 typedef struct listint_s
 {
-    const int n;
-    struct listint_s *prev;
-    struct listint_s *next;
+	const int n;
+	struct listint_s *prev;
+	struct listint_s *next;
 } listint_t;
 /**
  * print_array - Prints an array of integers
@@ -43,8 +45,11 @@ void quick_sort_hoare(int *array, size_t size);
 listint_t *swap_list_elements(listint_t **list, listint_t *swp);
 listint_t *create_listint(const int *array, size_t size);
 size_t get_size(listint_t **list);
-void partition_left(int *array, unsigned int start, unsigned int end, size_t size);
+void partition_left(int *array, unsigned int start,
+		unsigned int end, size_t size);
 void swapper(int *array, unsigned int i1, unsigned int i2);
 void sorter(int *array, int i, int end);
 void mergesorter(int *array, size_t size, unsigned int l, unsigned int r);
-void print_array_section(const int *array, unsigned int start, unsigned int end);
+void print_array_section(const int *array,
+		unsigned int start, unsigned int end);
+#endif
