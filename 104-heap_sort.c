@@ -30,21 +30,21 @@ void heap_sort(int *array, size_t size)
 
 	for (i = 0 ; i < size ; i++)
 	{
-		sorter(array, 1, size - 1 - i);
+		sorter(array, 1, size - 1 - i, size);
 		if (array[0] < array[1] && array[2] < array[1] && size - 1 - i >= 2)
 		{
 			swapper(array, 0, 1);
 			print_array(array, size);
-			sorter(array, 1, size - 1 - i);
+			sorter(array, 1, size - 1 - i, size);
 		}
 		if (array[0] < array[2] && array[1] < array[2] && size - 1 - i >= 2)
 		{
 			swapper(array, 0, 2);
 			print_array(array, size);
-			sorter(array, 2, size - 1 - i);
+			sorter(array, 2, size - 1 - i, size);
 		}
 		if (size - 1 - i >= 2)
-			sorter(array, 2, size - 1 - i);
+			sorter(array, 2, size - 1 - i, size);
 		if (size - 1 - i == 1 && array[0] < array[1])
 		{
 			swapper(array, 0, size - 1 - i);
@@ -72,24 +72,24 @@ void sorter(int *array, int i, int end, size_t size)
 		return;
 	if (i + i + 1 <= end)
 	{
-		sorter(array, i + i + 1, end);
+		sorter(array, i + i + 1, end, size);
 	}
 	if (array[i] < array[i + i + 1] && (i + i + 2 > end ||
 				array[i + i + 2] < array[i + i + 1]) && i + i + 1 <= end)
 	{
 		swapper(array, i, i + i + 1);
 		print_array(array, size);
-		sorter(array, i + i + 1, end);
+		sorter(array, i + i + 1, end, size);
 	}
 	if (i + i + 2 <= end)
 	{
-		sorter(array, i + i + 2, end);
+		sorter(array, i + i + 2, end, size);
 	}
 	if (array[i] < array[i + i + 2] && array[i + i + 1]
 			< array[i + i + 2] && i + i + 2 <= end)
 	{
 		swapper(array, i, i + i + 2);
 		print_array(array, size);
-		sorter(array, i + i + 2, end);
+		sorter(array, i + i + 2, end, size);
 	}
 }
